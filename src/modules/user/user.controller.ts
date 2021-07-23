@@ -12,7 +12,7 @@ const secret = 'jadfsijodfsJOIijiIIojNIO09H8798Jbguygkf56dsnyuuik'
 @Controller('user')
 export class UserController {
 
-    constructor(@InjectModel('User') private readonly user: Model<User> , private readonly userService: UserService) { }
+    constructor(@InjectModel('User') private readonly user: Model<User>, private readonly userService: UserService) { }
 
     // CREATE
 
@@ -41,21 +41,18 @@ export class UserController {
     @ApiOkResponse({ description: 'User Login' })
     @ApiUnauthorizedResponse({ description: 'Invalid Credentials' })
     async loginUser(
-        @Body('username') username: string,
+        @Body('user') user: string,
         @Body('password') password: string) {
-        if (!username || !password) {
-            throw Error('Invalid username or password');
+        if (!user || !password) {
+            throw Error('Invalid user or password');
         }
-        const user = await this.userService.checkUser(username);
-        if (await bcrypt.compare(password, user.password)) {
+        const userChecked = await this.userService.checkUser(user);
+        if (await bcrypt.compare(password, userChecked.password)) {
             const token = jwt.sign({ user: user }, secret)
-            return ({
-                "msg": `"User successfuly authenticated",
-            access: ${user.access},
-            id: ${user._id}`
-            })
-            throw Error('Invalid username or password');
-        };
+            return userChecked.access, userChecked._id, token
+        } else {
+            throw Error('Invalid user or password');
+        }
     }
 
     // READ
