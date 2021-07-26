@@ -1,10 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-// const path = require("path");
-// const fs = require("fs");
-// const os = require("os");
-// const homedir = os.homedir();
 require("dotenv").config({ path: __dirname + "/.env" });
 
 async function bootstrap() {

@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Patch, Delete, Put } from "@nestjs/common";
+import { Controller, Post, Body, Get, Param, Patch, Delete, Put, HttpException } from "@nestjs/common";
 import { UserService } from '../../shared/services/user/user.service';
 import { Model } from "mongoose";
 import { InjectModel } from '@nestjs/mongoose';
@@ -21,20 +21,39 @@ export class UserController {
     async insertUser(
         @Body('user') user: string,
         @Body('password') password: string,
+        @Body('nickname') nickname: string,
 
     ) {
-
         if (!user || typeof user !== 'string') {
-            throw new Error('User cannot be empty or other than string')
+            throw new HttpException ("User cannot be empty or other than string", 500)
+        }
+        if (user.length < 5) {
+            throw new HttpException ("Password should be at least 6 characters", 500)
+        }
+        if (!nickname || typeof nickname !== 'string') {
+            throw new HttpException ("User cannot be empty or other than string", 500)
+        }
+        if (nickname.length < 5) {
+            throw new HttpException ("Password should be at least 6 characters", 500)
         }
         if (!password || typeof password !== 'string') {
-            throw new Error('Password cannot be empty or other than string')
+            throw new HttpException ("User cannot be empty or other than string", 500)
         }
         if (password.length < 5) {
-            throw new Error('Password should be at least 6 characters')
+            throw new HttpException ("Password should be at least 6 characters", 500)
         }
-        const generatedId = await this.userService.insertUser(user, await bcrypt.hash(password, 10));
-        return { generatedId };
+        try{
+        const generatedId = await this.userService.insertUser(user, await bcrypt.hash(password, 10), nickname);
+        return {nickname: generatedId.nickname}
+        }catch (error) {
+            if (error.code === 11000) {
+                console.log(error.message)
+                 throw new HttpException ("Duplicate record", 500)
+            }
+            else{
+                throw new Error(error)
+            }
+        }
     };
 
     @Post('login')
@@ -42,14 +61,15 @@ export class UserController {
     @ApiUnauthorizedResponse({ description: 'Invalid Credentials' })
     async loginUser(
         @Body('user') user: string,
+
         @Body('password') password: string) {
         if (!user || !password) {
             throw Error('Invalid user or password');
         }
         const userChecked = await this.userService.checkUser(user);
         if (await bcrypt.compare(password, userChecked.password)) {
-            const token = jwt.sign({ user: user }, secret)
-            return userChecked.access, userChecked._id, token
+            const token = jwt.sign({ user: userChecked }, secret)
+    return  {id: userChecked._id, nickname: userChecked.nickname, access: userChecked.access, token: token} 
         } else {
             throw Error('Invalid user or password');
         }
@@ -71,10 +91,12 @@ export class UserController {
 
     // UPDATE
 
-    @Patch(':id')
+    @Put(':id')
     async updateUser(
+        @Param('id') id: string,
         @Body('user') user: User) {
-        const updatedUser = await this.userService.updateUser(user);
+            console.log(user)
+        const updatedUser = await this.userService.updateUser(id, user);
         return ({ "message": `User ${updatedUser.id} updated!` });
     }
 

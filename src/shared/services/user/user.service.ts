@@ -11,17 +11,15 @@ export class UserService {
 
     // CREATE
 
-    async insertUser(user: string, password: string) {
-        try {
-            const newUser = new this.userModel({ user: user, password: password });
-            const result = await newUser.save();
-            return result;
-        } catch (error) {
-            if (error.code === 11000) {
-                throw new Error('Error: user already in use')
-            }
-            throw error
-        }
+    async insertUser(user: string, password: string, nickname: string) {
+        const newUser = new this.userModel({
+            user: user,
+            password: password,
+            nickname: nickname,
+            access: 2
+        });
+        const result = await newUser.save();
+        return result;
     }
 
     // READ
@@ -49,8 +47,8 @@ export class UserService {
         return user as User;
     }
 
-    async checkUser(username: string) {
-        const checkUser = await this.userModel.findOne({ username }).lean();
+    async checkUser(user: string) {
+        const checkUser = await this.userModel.findOne({ user }).lean();
         return checkUser
     }
 
@@ -63,9 +61,9 @@ export class UserService {
         return updatedPassword
     }
 
-    async updateUser(user: User) {
-        const updateUser = await this.userModel.findByIdAndUpdate(user.id, user, { new: true });
-       
+    async updateUser(id: string, user: User) {
+        const updateUser = await this.userModel.findByIdAndUpdate(id, user, { new: true });
+        console.log(updateUser)
         return updateUser;
     }
 

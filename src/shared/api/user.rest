@@ -1,0 +1,51 @@
+POST http://localhost:3000/user HTTP/1.1
+content-type: application/json
+
+{  
+"user": "jason@friday13.com",
+    "password": "jasonpasswd",
+    "nickname": "jason"
+}
+###
+POST http://localhost:3000/user/login HTTP/1.1
+content-type: application/json
+
+{  
+    "user": "jason@friday13.com",
+    "password": "jasonpasswd"
+}
+###
+PUT http://localhost:3000/user/60fcc08cb6ce154f20817cb4  HTTP/1.1
+content-type: application/json
+
+{ "user":{  
+    "name": "Ash Williams",
+    "img": "",
+    "birth_date": "07/12/1954",
+    "social": {
+        "instagram": "@evildead",
+        "facebook": "evildead",
+        "twitch": "evildead_twitch",
+        "youtube": "evildead_youtube"
+    },
+    "badges": ["demon killer"],
+    "stakers": [],
+    "score": { "w": 92, "l": 99, "d": 11 },
+    "ranking": [],
+    "tournament": [{ 
+    "tornament": "Magic Palper", 
+    "totalScore": 123, 
+    "results": 55
+    }],
+    "evo": [],
+    "wallet": ""
+}
+}
+###
+PUT http://localhost:3000/user/60fc32301a68ef39e7f7dbd4 HTTP/1.1
+content-type: application/json
+
+{"user":{  
+    "name": "Jason Vorhees"}
+}
+###
