@@ -8,7 +8,8 @@ import { TournamentModule } from './modules/tournament/tournament.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://equalssport:equalssportpasswd@localhost:27019/equalssport', {  useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }), 
+    MongooseModule.forRoot('mongodb+srv://equalssport:equalssportpasswd@cluster0.nlepj.mongodb.net/equalssport?retryWrites=true&w=majority', {  useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }), 
+    // MongooseModule.forRoot('mongodb://equalssport:equalssportpasswd@localhost:27019/equalssport', {  useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }), 
     UserModule, RankingModule, TournamentModule],
   controllers: [AppController],
   providers: [AppService],
