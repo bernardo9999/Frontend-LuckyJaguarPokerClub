@@ -2,20 +2,20 @@ POST http://localhost:3000/user HTTP/1.1
 content-type: application/json
 
 {  
-"user": "jason@friday13.com",
-    "password": "jasonpasswd",
-    "nickname": "jason"
+"user": "ash@evildead.com",
+    "password": "ashpasswd",
+    "nickname": "ashwilliams"
 }
 ###
 POST http://localhost:3000/user/login HTTP/1.1
 content-type: application/json
 
 {  
-    "user": "jason@friday13.com",
-    "password": "jasonpasswd"
+    "user": "ash@evildead.com",
+    "password": "ashpasswd"
 }
 ###
-PUT http://localhost:3000/user/60fcc08cb6ce154f20817cb4  HTTP/1.1
+PUT http://localhost:3000/user/60feeb3c479d6b6067e7f233  HTTP/1.1
 content-type: application/json
 
 { "user":{  
