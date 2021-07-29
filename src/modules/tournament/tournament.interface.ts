@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 const mongoosePaginate = require("mongoose-paginate");
 
 export const TournamentSchema = new mongoose.Schema({
-    name: { type: String },
+    name: { type: String, unique: true },
     start_date: { type: String },
     end_date: { type: String },
     player: [{ type: String, unique: true }],
