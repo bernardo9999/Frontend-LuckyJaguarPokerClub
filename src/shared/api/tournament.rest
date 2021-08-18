@@ -1,0 +1,73 @@
+GET http://localhost:3000/tournament HTTP/1.1
+###
+POST http://localhost:3003/tournament HTTP/1.1
+content-type: application/json
+
+{
+    "tournament":{
+    "name": "TaçaMagic3",
+    "organizer": "bernardo"
+    }
+}
+###
+POST http://localhost:3003/tournament/add-player/611b1c42a2da180365effec6 HTTP/1.1
+content-type: application/json
+
+{ 
+ "user_id": "6102b65370751233ec721d18",
+ "nickname": "jason", 
+ "user": "jason@friday13.com", 
+ "seed": 2
+}
+###
+POST http://localhost:3003/tournament/add-player/611b1c42a2da180365effec6 HTTP/1.1
+content-type: application/json
+
+{ 
+ "user_id": "6102b73f70751233ec721d1c",
+ "nickname": "freddy", 
+ "user": "freddy@nigtmare.com", 
+ "seed": 3
+}
+###
+POST http://localhost:3003/tournament/start-tourney/611b1c42a2da180365effec6 HTTP/1.1
+content-type: application/json
+
+
+{
+    "tourney":{
+        "name": "TaçaMagic3",
+        "format": "swiss",
+        "playoffs": "elim",
+        "cutLimit": 8,
+        "bestOf": 3,
+        "winValue": 3,
+        "drawValue": 1,
+        "tiebreakers": ["magic-tcg"]
+    }
+}
+###
+GET http://localhost:3003/tournament/active-matches/611b1c42a2da180365effec6 HTTP/1.1
+content-type: application/json
+###
+GET http://localhost:3003/tournament/standings/611b1c42a2da180365effec6 HTTP/1.1
+content-type: application/json
+###
+GET http://localhost:3003/tournament/tournament-name-id/611b1c42a2da180365effec6 HTTP/1.1
+content-type: application/json
+
+###
+POST http://localhost:3003/tournament/add-result/611b1c42a2da180365effec6 HTTP/1.1
+content-type: application/json
+
+{
+    "match_id": "lW1VPxoAWpwb",
+    "resultPlayerOne": 2,
+    "resultPlayerTwo": 0
+}
+###
+GET http://localhost:3003/tournament/next-round/611b1c42a2da180365effec6 HTTP/1.1
+content-type: application/json
+###
+GET http://localhost:3003/tournament/clear-cache/611b1c42a2da180365effec6 HTTP/1.1
+content-type: application/json

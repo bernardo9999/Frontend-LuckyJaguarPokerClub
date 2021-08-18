@@ -15,7 +15,7 @@ content-type: application/json
     "password": "ashpasswd"
 }
 ###
-PUT http://localhost:3000/user/60feeb3c479d6b6067e7f233  HTTP/1.1
+PUT http://localhost:3000/user/610954a8b1b7ff3492354667  HTTP/1.1
 content-type: application/json
 
 { "user":{  

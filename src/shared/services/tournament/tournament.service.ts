@@ -11,10 +11,21 @@ export class TournamentService {
 
     // CREATE
 
-    async insertTournament(tournament: Tournament) {
-        const newTournament = new this.tournamentModel({ tournament: tournament });
-        const tournamentCreated = await newTournament.save();
-        return tournamentCreated;
+    insertTournament(tournament: Tournament) {
+        const newTournament = new this.tournamentModel(tournament);
+        return newTournament.save();
+    }
+
+    insertTourney(id, manager, newTourney) {
+        return this.tournamentModel.findByIdAndUpdate({ _id: id }, { "$set": { "EventManager": manager , "tourney": newTourney } }, {  upsert: true, new: true, setDefaultsOnInsert: true })
+
+    }
+
+    insertPlayer(id, player) {
+        return this.tournamentModel.findByIdAndUpdate({ _id: id }, { "$push": { "players": player } },  { upsert: true, new: true, setDefaultsOnInsert: true })
+        // return await this.tournamentModel.findByIdAndUpdate({ _id: id }, { "$push": { "tourney.$[outer].players": player } }, { "arrayFilters": [{ "outer.name": tourney_name }], new: true }
+            // return await this.tournamentModel.findByIdAndUpdate({ _id: id }, { "$set": { "tourney.$[outer].players.$[inner]": player } }, { "arrayFilters": [{ "outer.name": tourney_name }, { "inner.id": player.id }], upsert: true, new: true }, function (err, doc) {
+           
     }
 
     // READ
@@ -49,6 +60,7 @@ export class TournamentService {
         const updateTournament = await this.tournamentModel.findByIdAndUpdate(tournament.id, tournament, { new: true });
         return updateTournament;
     }
+
 
     // DELETE
 

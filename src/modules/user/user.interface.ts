@@ -20,7 +20,7 @@ export const UserSchema = new mongoose.Schema({
     ranking: [{ type: String }],
     access: { type: Number },
     tournament: [
-        { tornament: { type: String }, totalScore: { type: Number }, results: { type: Number } },
+        { id: { type: String }, name: { type: String }, totalScore: { type: Number, default: 0 }, results: { type: Number, default: 0 } },
     ],
     evo: 
         { ein: { type: String }, address: { type: String }, state : { type: String } }
@@ -50,7 +50,7 @@ export interface User extends mongoose.Document {
     score: [{ w: number, l: number, d: number }],
     ranking: [string],
     access: number,
-    tournament: [{ tornament: string, totalScore: number, results: number }],
+    tournament: [{ id: string, name: string, totalScore: number, results: number }],
     evo: { ein: string, address: string, state: string },
     wallet: string,
     user_since: Date,
