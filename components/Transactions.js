@@ -6,13 +6,13 @@ import { Button, Divider, FormControl, FormLabel, Input, Link, Text } from "@cha
 export default function Transactions({user}){
     const Web3Api = useMoralisWeb3Api()
     
-    const BASE_URL = 'https://mumbai.polygonscan.com/tx/'
+    const BASE_URL = 'https://mainnet.polygonscan.com/tx/'
 
     const [transactions, setTransactions] = useState()
 
     const fetchTransactions = async ()=>{
         const data = await Web3Api.account.getTransactions({
-            chain: "mumbai",
+            chain: "mainnet",
             address: user.get('ethAddress'),
             limit: 5
         })
