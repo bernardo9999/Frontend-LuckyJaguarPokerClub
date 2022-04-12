@@ -13,7 +13,7 @@ export default function Balance({ user }) {
   const fecthNativeBalance = async () => {
     const result = await Web3Aapi.account
       .getNativeBalance({
-        chain: "mumbai",
+        chain: "mainnet",
         address: user.get("ethAddress"),
       })
       .catch((e) => console.log(e));
