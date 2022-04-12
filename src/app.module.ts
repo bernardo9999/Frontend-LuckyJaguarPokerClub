@@ -7,7 +7,6 @@ import { UserModule } from './modules/user/user.module';
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb+srv://pockerclub:pockerclubpasswd@cluster0.3f5k6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {  useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }), 
-    // MongooseModule.forRoot('mongodb://equalssport:equalssportpasswd@localhost:27019/equalssport', {  useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }), 
     UserModule],
   controllers: [AppController],
   providers: [AppService],
