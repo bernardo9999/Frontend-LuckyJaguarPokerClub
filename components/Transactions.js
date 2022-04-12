@@ -6,7 +6,7 @@ import { Button, Divider, FormControl, FormLabel, Input, Link, Text } from "@cha
 export default function Transactions({user}){
     const Web3Api = useMoralisWeb3Api()
     
-    const BASE_URL = 'https://mainnet.polygonscan.com/tx/'
+    const BASE_URL = 'https://polygonscan.com/tx/'
 
     const [transactions, setTransactions] = useState()
 
