@@ -25,32 +25,32 @@ export class UserController {
 
     ) {
         if (!user || typeof user !== 'string') {
-            throw new HttpException ("User cannot be empty or other than string", 500)
+            throw new HttpException("User cannot be empty or other than string", 500)
         }
         if (user.length < 5) {
-            throw new HttpException ("Password should be at least 6 characters", 500)
+            throw new HttpException("Password should be at least 6 characters", 500)
         }
         if (!nickname || typeof nickname !== 'string') {
-            throw new HttpException ("User cannot be empty or other than string", 500)
+            throw new HttpException("User cannot be empty or other than string", 500)
         }
         if (nickname.length < 5) {
-            throw new HttpException ("Password should be at least 6 characters", 500)
+            throw new HttpException("Password should be at least 6 characters", 500)
         }
         if (!password || typeof password !== 'string') {
-            throw new HttpException ("User cannot be empty or other than string", 500)
+            throw new HttpException("User cannot be empty or other than string", 500)
         }
         if (password.length < 5) {
-            throw new HttpException ("Password should be at least 6 characters", 500)
+            throw new HttpException("Password should be at least 6 characters", 500)
         }
-        try{
-        const generatedId = await this.userService.insertUser(user, await bcrypt.hash(password, 10), nickname);
-        return {nickname: generatedId.nickname}
-        }catch (error) {
+        try {
+            const generatedId = await this.userService.insertUser(user, await bcrypt.hash(password, 10), nickname);
+            return { nickname: generatedId.nickname }
+        } catch (error) {
             if (error.code === 11000) {
                 console.log(error.message)
-                 throw new HttpException ("Duplicate record", 500)
+                throw new HttpException("Duplicate record", 500)
             }
-            else{
+            else {
                 throw new Error(error)
             }
         }
@@ -69,7 +69,7 @@ export class UserController {
         const userChecked = await this.userService.checkUser(user);
         if (await bcrypt.compare(password, userChecked.password)) {
             const token = jwt.sign({ user: userChecked }, secret)
-    return  {id: userChecked._id, nickname: userChecked.nickname, access: userChecked.access, token: token} 
+            return { id: userChecked._id, nickname: userChecked.nickname, access: userChecked.access, token: token }
         } else {
             throw Error('Invalid user or password');
         }
@@ -95,7 +95,7 @@ export class UserController {
     async updateUser(
         @Param('id') id: string,
         @Body('user') user: User) {
-            console.log(user)
+        console.log(user)
         const updatedUser = await this.userService.updateUser(id, user);
         return ({ "message": `User ${updatedUser.id} updated!` });
     }
@@ -129,4 +129,5 @@ export class UserController {
         const deletedUser = await this.userService.deleteUser(id);
         return ({ "message": `User ${deletedUser} deleted!` });
     }
+
 }

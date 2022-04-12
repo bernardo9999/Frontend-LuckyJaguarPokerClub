@@ -3,14 +3,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './modules/user/user.module';
-import { RankingModule } from './modules/ranking/ranking.module';
-import { TournamentModule } from './modules/tournament/tournament.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://equalssport:equalssportpasswd@cluster0.nlepj.mongodb.net/equalssport?retryWrites=true&w=majority', {  useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }), 
+    MongooseModule.forRoot('mongodb+srv://pockerclub:pockerclubpasswd@cluster0.3f5k6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {  useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }), 
     // MongooseModule.forRoot('mongodb://equalssport:equalssportpasswd@localhost:27019/equalssport', {  useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }), 
-    UserModule, RankingModule, TournamentModule],
+    UserModule],
   controllers: [AppController],
   providers: [AppService],
 })

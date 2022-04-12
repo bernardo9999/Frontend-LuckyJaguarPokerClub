@@ -16,7 +16,7 @@ export class UserService {
             user: user,
             password: password,
             nickname: nickname,
-            access: 2
+            access: 0
         });
         const result = await newUser.save();
         return result;
@@ -66,18 +66,18 @@ export class UserService {
         return updateUser;
     }
 
-    async insertTournamentOrganizer(tournament_id, organizer, tournament_name){
-        let tournament = {_id: tournament_id, name: tournament_name}
-        return await this.userModel.findOneAndUpdate({user: organizer},  {$push: {"tournament": tournament}}, { upsert: true, new: true, setDefaultsOnInsert: true })
+    async insertTournamentOrganizer(tournament_id, organizer, tournament_name) {
+        let tournament = { _id: tournament_id, name: tournament_name }
+        return await this.userModel.findOneAndUpdate({ user: organizer }, { $push: { "tournament": tournament } }, { upsert: true, new: true, setDefaultsOnInsert: true })
     }
 
-    async insertTournamentPlayer(tournament_id, user_id, tournament_name){
-        let tournament = {_id: tournament_id, name: tournament_name}
-        return await this.userModel.findOneAndUpdate({_id: user_id},  {$push: {"tournament": tournament}}, { upsert: true, new: true, setDefaultsOnInsert: true })
+    async insertTournamentPlayer(tournament_id, user_id, tournament_name) {
+        let tournament = { _id: tournament_id, name: tournament_name }
+        return await this.userModel.findOneAndUpdate({ _id: user_id }, { $push: { "tournament": tournament } }, { upsert: true, new: true, setDefaultsOnInsert: true })
     }
 
-    async insertTourney(tournament, user){
-        return await this.userModel.findOneAndUpdate({user},  {$push: {"tournament": {"name":  tournament.name}}}, { upsert: true, new: true, setDefaultsOnInsert: true })
+    async insertTourney(tournament, user) {
+        return await this.userModel.findOneAndUpdate({ user }, { $push: { "tournament": { "name": tournament.name } } }, { upsert: true, new: true, setDefaultsOnInsert: true })
     }
 
     // DELETE

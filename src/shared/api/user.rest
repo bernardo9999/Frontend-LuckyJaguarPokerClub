@@ -1,4 +1,4 @@
-POST http://localhost:3000/user HTTP/1.1
+POST http://localhost:3003/user HTTP/1.1
 content-type: application/json
 
 {  
@@ -7,7 +7,7 @@ content-type: application/json
     "nickname": "ashwilliams"
 }
 ###
-POST http://localhost:3000/user/login HTTP/1.1
+POST http://localhost:3003/user/login HTTP/1.1
 content-type: application/json
 
 {  
@@ -15,7 +15,7 @@ content-type: application/json
     "password": "ashpasswd"
 }
 ###
-PUT http://localhost:3000/user/610954a8b1b7ff3492354667  HTTP/1.1
+PUT http://localhost:3003/user/62467ba7fe36c46d0b0d4437  HTTP/1.1
 content-type: application/json
 
 { "user":{  
@@ -29,23 +29,25 @@ content-type: application/json
         "youtube": "evildead_youtube"
     },
     "badges": ["demon killer"],
-    "stakers": [],
-    "score": { "w": 92, "l": 99, "d": 11 },
-    "ranking": [],
+    "score": 92,
+    "ranking": 0,
     "tournament": [{ 
     "tornament": "Magic Palper", 
     "totalScore": 123, 
     "results": 55
     }],
-    "evo": [],
     "wallet": ""
 }
 }
 ###
-PUT http://localhost:3000/user/60fc32301a68ef39e7f7dbd4 HTTP/1.1
+PUT http://localhost:3003/user/624621994e2d453bb3683654 HTTP/1.1
 content-type: application/json
 
 {"user":{  
     "name": "Jason Vorhees"}
 }
+###
+DELETE http://localhost:3003/user/62467ba7fe36c46d0b0d4437 HTTP/1.1
+content-type: application/json
+
 ###

@@ -15,16 +15,12 @@ export const UserSchema = new mongoose.Schema({
         youtube: { type: String },
     },
     badges: [{ type: String }],
-    stakers: [{ type: String }],
-    score: { w: { type: Number, default: 0 }, l: { type: Number, default: 0 }, d: { type: Number, default: 0 } },
-    ranking: [{ type: String }],
+    score: { type: Number},
+    ranking: { type: Number },
     access: { type: Number },
     tournament: [
         { id: { type: String }, name: { type: String }, totalScore: { type: Number, default: 0 }, results: { type: Number, default: 0 } },
     ],
-    evo: 
-        { ein: { type: String }, address: { type: String }, state : { type: String } }
-    ,
     wallet: { type: String },
     user_since: { type: Date, default: Date.now },
 },{ collection: 'user' });
@@ -46,12 +42,10 @@ export interface User extends mongoose.Document {
         youtube: string,
     },
     badges: [string],
-    stakers: [string],
-    score: [{ w: number, l: number, d: number }],
-    ranking: [string],
+    score: number,
+    ranking: number,
     access: number,
     tournament: [{ id: string, name: string, totalScore: number, results: number }],
-    evo: { ein: string, address: string, state: string },
     wallet: string,
     user_since: Date,
 
