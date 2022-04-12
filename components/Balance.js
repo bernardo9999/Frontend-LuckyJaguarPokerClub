@@ -26,7 +26,7 @@ export default function Balance({ user }) {
     fecthNativeBalance();
     fetchERC20Balances({
         params:{
-            chain: "mumbai",
+            chain: "mainnet",
             address: user.get('ethAddress')
         }
     });
